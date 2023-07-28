@@ -7,8 +7,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'python3 --version'
-                // run myfile.py from workspace
-                sh 'python3 myfile.py'                
+                sh 'python3 src/main.py'                
             }
         }
         stage('Test') {
@@ -19,6 +18,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+            }
+        }
+        stage('Archive') {
+            steps {
+                echo 'Archiving....'
+
+                // get the file that is generated in the build stage under the target folder
+                archiveArtifacts artifacts: 'target/*.txt', fingerprint: true
             }
         }
     }
