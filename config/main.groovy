@@ -1,16 +1,15 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven3'
+        python 'Python3'
     }
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                // check if mvn is installed
-                sh 'mvn --version'
-                // if not, then install
-                sh 'mvn clean install'
+                sh 'python --version'
+                // run myfile.py from workspace
+                sh 'python myfile.py'                
             }
         }
         stage('Test') {
