@@ -6,9 +6,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'python --version'
+                sh 'python3 --version'
                 // run myfile.py from workspace
-                sh 'python myfile.py'                
+                sh 'python3 myfile.py'                
             }
         }
         stage('Test') {
