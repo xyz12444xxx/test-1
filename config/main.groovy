@@ -1,24 +1,5 @@
 // import jfrog
 import jfrog.dsl.*
-
-// get the jfrog server details
-def server = Artifactory.server 'jfrog-1'
-
-// get the credentials from the jenkins credentials store
-def credentials = Artifactory.credentials 'jfroguser'
-
-// get the jfrog repository details
-def repo = Artifactory.repo 'demo-thales'
-
-def uploadSpec = """{
-    "files": [
-        {
-            "pattern": "target/*.log",
-            "target": "logs/"
-        }
-    ]
-}"""
-
 pipeline {
     agent any
     // tools {
@@ -49,7 +30,15 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
 
                 scripts {
-                    // upload the file to the jfrog repository
+                    def server = Artifactory.server 'jfrog-1'
+                    def uploadSpec = """{
+                        "files": [
+                            {
+                                "pattern": "target/*.log",
+                                "target": "generic-local/"
+                            }
+                        ]
+                    }"""
                     server.upload(uploadSpec)
                 }
                 
