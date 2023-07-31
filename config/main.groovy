@@ -29,7 +29,7 @@ pipeline {
                 // get the file that is generated in the build stage under the target folder
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
 
-                scripts {
+                script {
                     storeToArtifactory()
                 }
                 
