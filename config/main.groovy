@@ -49,7 +49,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
 
                 // upload the file to the jfrog repository
-                server.upload(uploadSpec, repo, credentials)
+                server.upload(uploadSpec)
                 
                 echo 'Archiving done....'
             }
