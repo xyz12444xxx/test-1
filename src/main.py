@@ -9,6 +9,7 @@ def create_file():
     path = "target"
     # create directory if does not exist
     if not os.path.exists(path):
+        print("Creating directory: " + path)
         os.makedirs(path)                
     
     # name convention is ddmmyyyy_hhmmss.log
