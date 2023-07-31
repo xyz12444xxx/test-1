@@ -30,20 +30,24 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
 
                 scripts {
-                    def server = Artifactory.server 'jfrog-1'
-                    def uploadSpec = """{
-                        "files": [
-                            {
-                                "pattern": "target/*.log",
-                                "target": "generic-local/"
-                            }
-                        ]
-                    }"""
-                    server.upload(uploadSpec)
+                    storeToArtifactory()
                 }
                 
                 echo 'Archiving done....'
             }
         }
     }
+}
+
+def storeToArtifactory() {
+    def server = Artifactory.server 'artifactory'
+    def uploadSpec = """{
+        "files": [
+            {
+                "pattern": "target/*.log",
+                "target": "generic-local/"
+            }
+        ]
+    }"""
+    server.upload(uploadSpec)
 }
