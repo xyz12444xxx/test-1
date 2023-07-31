@@ -2,10 +2,10 @@
 import jfrog.dsl.*
 
 // get the jfrog server details
-def server = Artifactory.server 'http://localhost:8082/artifactory'
+def server = Artifactory.server 'jfrog-1'
 
 // get the credentials from the jenkins credentials store
-def credentials = Artifactory.credentials 'djfroguser'
+def credentials = Artifactory.credentials 'jfroguser'
 
 // get the jfrog repository details
 def repo = Artifactory.repo 'demo-thales'
