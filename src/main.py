@@ -2,7 +2,7 @@ import datetime
 import os
 
 # define a version constant
-VERSION = "1.0.0"
+VERSION = "1"
 OS_NAME = "baseline"
 
 print("hello thales!-whoo!")
@@ -21,7 +21,6 @@ def create_file():
         for file in os.listdir(path):
             os.remove(path + "/" + file)
     
-    # name convention is ddmmyyyy_hhmmss.log
     fileName = f"{OS_NAME}_{VERSION}.log"
     f = open(path + "/" + fileName, "w+")
     for i in range(10):
