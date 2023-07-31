@@ -40,7 +40,7 @@ pipeline {
 }
 
 def storeToArtifactory() {
-    def server = Artifactory.server 'artifactory'
+    def server = Artifactory.server 'jfrog-1'
     def uploadSpec = """{
         "files": [
             {
