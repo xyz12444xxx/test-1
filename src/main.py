@@ -5,7 +5,7 @@ import os
 VERSION = "1.0.0"
 OS_NAME = "baseline"
 
-print("hello thales!")
+print("hello thales!-whoo!")
 
 # create a text file with some data inside
 def create_file():
