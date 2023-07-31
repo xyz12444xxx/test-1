@@ -26,6 +26,10 @@ pipeline {
 
                 // get the file that is generated in the build stage under the target folder
                 archiveArtifacts artifacts: 'target/*.txt', fingerprint: true
+                // store the artifacts in jfrog http://localhost:8082/artifactory/demo-thales/
+                storeArtifacts allowEmptyArchive: true, allowUnstable: true, excludes: '', fingerprint: true, includes: 'target/*.txt', targetRepo: 'demo-thales', uploadPattern: '' 
+
+                echo 'Archiving done....'
             }
         }
     }

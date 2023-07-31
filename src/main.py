@@ -10,7 +10,7 @@ def create_file():
     fileName = datetime.datetime.now().strftime("%d%m%Y_%H%M%S") + ".log"
     f = open("target/" + fileName, "w+")
     for i in range(10):
-        f.write("This is line %d\r\n" % (i+1))
+        f.write("This is line %d\n" % (i+1))
     f.close()
-    
+
 create_file()

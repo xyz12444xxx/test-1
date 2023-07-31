@@ -1,0 +1,36 @@
+services:
+  jenkins:
+    container_name: jenkinsci
+    build: ./docker/jenkins      
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./volumes/jenkins:/var/jenkins_home
+    networks:
+      - jenkins
+
+  jfrog:
+    container_name: jfrog-artifactory
+    build: ./docker/jfrog
+    ports:
+      - 8081:8081
+      - 8082:8082
+    volumes:
+      - /volumes/jfrog:/var/opt/jfrog/artifactory
+    networks:
+      - jenkins
+    
+  # bitbucket:
+  #   image: atlassian/bitbucket
+  #   ports:
+  #     - 7990:7990
+  #     - 7999:7999
+  #   volumes:
+  #     - /volumes/bitbucket:/var/atlassian/application-data/bitbucket
+  #   networks:
+  #     - jenkins
+
+networks:
+  jenkins:
+    driver: bridge
