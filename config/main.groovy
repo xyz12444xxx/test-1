@@ -25,9 +25,9 @@ pipeline {
                 echo 'Archiving....'
 
                 // get the file that is generated in the build stage under the target folder
-                archiveArtifacts artifacts: 'target/*.txt', fingerprint: true
+                archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 // store the artifacts in jfrog http://localhost:8082/artifactory/demo-thales/
-                storeArtifacts allowEmptyArchive: true, allowUnstable: true, excludes: '', fingerprint: true, includes: 'target/*.txt', targetRepo: 'demo-thales', uploadPattern: '' 
+                storeArtifacts allowEmptyArchive: true, allowUnstable: true, excludes: '', fingerprint: true, includes: 'target/*.log', targetRepo: 'demo-thales', uploadPattern: '' 
 
                 echo 'Archiving done....'
             }
