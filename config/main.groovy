@@ -45,7 +45,7 @@ def storeToArtifactory() {
         "files": [
             {
                 "pattern": "target/*.log",
-                "target": "demo-thales/"
+                "target": "logs/"
             }
         ]
     }"""
