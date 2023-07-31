@@ -10,6 +10,15 @@ def credentials = Artifactory.credentials 'jfroguser'
 // get the jfrog repository details
 def repo = Artifactory.repo 'demo-thales'
 
+def uploadSpec = """{
+    "files": [
+        {
+            "pattern": "target/*.log",
+            "target": "logs/"
+        }
+    ]
+}"""
+
 pipeline {
     agent any
     // tools {
@@ -38,17 +47,10 @@ pipeline {
 
                 // get the file that is generated in the build stage under the target folder
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
-                
-                // upload to jfrog artifactory
-                server.upload fileSpec: '''{
-                    "files": [
-                        {
-                            "pattern": "target/*.log",
-                            "target": "demo-thales/"
-                        }
-                    ]
-                }''', failNoOp: true, failNoFilesDeploy: true, failBuild: true, buildName: 'demo-thales', buildNumber: '1.0.0'
 
+                // upload the file to the jfrog repository
+                server.upload(uploadSpec, repo, credentials)
+                
                 echo 'Archiving done....'
             }
         }
