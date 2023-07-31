@@ -1,15 +1,39 @@
-// import jfrog
-import jfrog.dsl.*
+def server = Artifactory.server 'jfrog-1'
+def jfrogSpec = """{
+    "files": [
+        {
+            "pattern": "logs/*.log",
+            "target": "target/"
+        }
+    ]
+}"""
+
 pipeline {
     agent any
     // tools {
     // }
     stages {
         stage('Build') {
+            // only build if there are changes in py file types
+            when {
+                changeset "**/*.py"
+            }
             steps {
                 echo 'Building..'
                 sh 'python3 --version'
                 sh 'python3 src/main.py'                
+            }
+            
+            // otherwise get the log from artifactory
+            when {
+                not {
+                    changeset "**/*.py"
+                }
+            }
+            steps {
+                script {
+                    server.download(jfrogSpec)
+                }
             }
         }
         stage('Test') {
@@ -30,24 +54,11 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
 
                 script {
-                    storeToArtifactory()
+                    server.upload(jfrogSpec)
                 }
                 
                 echo 'Archiving done....'
             }
         }
     }
-}
-
-def storeToArtifactory() {
-    def server = Artifactory.server 'jfrog-1'
-    def uploadSpec = """{
-        "files": [
-            {
-                "pattern": "target/*.log",
-                "target": "logs/"
-            }
-        ]
-    }"""
-    server.upload(uploadSpec)
 }
