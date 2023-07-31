@@ -23,7 +23,8 @@ pipeline {
                 sh 'python3 --version'
                 sh 'python3 src/main.py'                
             }
-            
+        }
+        stage('Download') {            
             // otherwise get the log from artifactory
             when {
                 not {
