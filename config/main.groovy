@@ -48,8 +48,10 @@ pipeline {
                 // get the file that is generated in the build stage under the target folder
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
 
-                // upload the file to the jfrog repository
-                server.upload(uploadSpec)
+                scripts {
+                    // upload the file to the jfrog repository
+                    upload spec: uploadSpec, server: server, credentials: credentials, failNoOp: true
+                }
                 
                 echo 'Archiving done....'
             }
