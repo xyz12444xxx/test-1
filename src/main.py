@@ -2,7 +2,7 @@ import datetime
 import os
 
 # define a version constant
-VERSION = "1"
+VERSION = "1.0.0"
 OS_NAME = "baseline"
 
 print("hello thales!-whoo!")

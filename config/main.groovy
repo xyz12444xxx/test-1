@@ -2,8 +2,8 @@ def server = Artifactory.server 'jfrog-1'
 def jfrogSpec = """{
     "files": [
         {
-            "pattern": "logs/*.log",
-            "target": "target/"
+            "pattern": "target/*.log",
+            "target": "logs/"
         }
     ]
 }"""
