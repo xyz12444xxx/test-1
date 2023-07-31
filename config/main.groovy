@@ -50,7 +50,7 @@ pipeline {
 
                 scripts {
                     // upload the file to the jfrog repository
-                    upload spec: uploadSpec, server: server, credentials: credentials, failNoOp: true
+                    server.upload(uploadSpec)
                 }
                 
                 echo 'Archiving done....'
