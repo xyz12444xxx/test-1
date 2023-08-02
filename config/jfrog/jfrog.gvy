@@ -52,6 +52,7 @@ class JfrogBase {
 
 // initiate the class and return instance
 public JfrogBase GetInstance(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+    echo 'im here at jfrog.gvy getinstance'
     return new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
 }
 
