@@ -3,7 +3,7 @@ _instance = null
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     echo "im here at jfrog.gvy getinstance"
-    if (_instance == false) {
+    if (!_instance) {
        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
     } else {
         echo 'instance already exists'
