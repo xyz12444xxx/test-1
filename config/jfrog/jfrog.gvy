@@ -44,7 +44,7 @@ class JfrogBase {
                 "files": [
                     {
                         "pattern": "${fromDir}/${filename}",
-                        "target": "${reportsStorePath}/"
+                        "target": "${this.reportsStorePath}/"
                     }
                 ]
             }"""
@@ -56,9 +56,9 @@ class JfrogBase {
                     spec: spec
                 )
             } catch (Exception e) {
-                echo "Failed to upload ${filename} to ${reportsStorePath}"
+                echo "Failed to upload ${filename} to ${this.reportsStorePath}"
                 allUploaded = false
-                throw new Exception("Failed to upload ${filename} to ${reportsStorePath}")
+                throw new Exception("Failed to upload ${filename} to ${this.reportsStorePath}")
             }
         }
 
@@ -67,7 +67,7 @@ class JfrogBase {
 }
 
 // initiate the class and return instance
-private JfrogBase _instance = null
+// private JfrogBase _instance = null
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     echo 'im here at jfrog.gvy getinstance'
     // if (_instance == null) {
