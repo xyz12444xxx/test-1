@@ -64,23 +64,23 @@ class JfrogBase {
 //     // }
 }
 
-// def _instance = null
+private JfrogBase _instance
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     echo "im here at jfrog.gvy getinstance"
-    // if (_instance == null) {
-        def _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
-    //     return true
-    // } else {
-    //     echo 'instance already exists'
-    //     return false
-    // }
+    if (_instance == null) {
+        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+        return true
+    } else {
+        echo 'instance already exists'
+        return false
+    }
 }
 
-// // public void UploadReports(String fromDir, String[] filenames) {
-// //     echo 'im here at jfrog.gvy uploadreports'
-// //     _instance.UploadReports(fromDir, filenames)
-// // }
+public void uploadReports(String fromDir, String[] filenames) {
+    echo 'im here at jfrog.gvy uploadreports'
+    _instance.UploadReports(fromDir, filenames)
+}
 
 return this
