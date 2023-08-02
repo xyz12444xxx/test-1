@@ -1,6 +1,9 @@
-import config.jfrog.JfrogBase
+def jfrogBaseScript = load('config/jfrogBase.groovy')
+def jfrogBaseClass = jfrogBaseScript.getClass().find { it.name == 'JfrogBase' }
 
-def jfrog = new JfrogBase('artifactory-1', "123", "adfasdf", 'logs')
+// create artifactory server
+def jfrog = new jfrogBaseClass('artifactory-1', "asdfsf", "sdsfd", 'logs')
+
 
 pipeline {
     agent any
