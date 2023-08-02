@@ -1,4 +1,4 @@
-private JfrogBase _instance = null
+
 
 class JfrogBase {
     private String id
@@ -60,7 +60,7 @@ class JfrogBase {
         return allUploaded
     }
 }
-
+private JfrogBase _instance = null
 // public JfrogBase _instance
 instanceCreated = false
 
