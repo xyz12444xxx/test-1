@@ -1,3 +1,5 @@
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
 // class JfrogBase {
 //     private String id
 //     private String serverUrl
