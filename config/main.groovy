@@ -2,7 +2,7 @@ def jfrogBaseScript = load('jfrogBase.groovy')
 def jfrogBaseClass = jfrogBaseScript.getClasses().find { it.name == 'JfrogBase' }
 
 // create artifactory server
-def jfrog = new jfrogBaseClass('artifactory-1', "asdfsf", "sdsfd", 'logs')
+def jfrog = new jfrogBaseClass.newInstance('artifactory-1', "asdfsf", "sdsfd", 'logs')
 
 
 pipeline {
