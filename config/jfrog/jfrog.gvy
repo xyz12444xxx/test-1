@@ -8,6 +8,12 @@ class JfrogBase {
 
     // constructor
     JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+        echo 'im here at jfrogbase constructor'
+        echo id
+        echo serverUrl
+        echo credentialsId
+        echo reportsStorePath
+        
         this.id = id
         this.serverUrl = serverUrl
         this.credentialsId = credentialsId
