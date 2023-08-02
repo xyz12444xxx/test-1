@@ -1,3 +1,5 @@
+import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+
 def jfrog = load('config/JfrogBase.groovy')
 
 pipeline {
