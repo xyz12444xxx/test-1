@@ -1,3 +1,4 @@
+package config.jfrog
 
 class JfrogBase {
     private String id
@@ -66,22 +67,22 @@ class JfrogBase {
     }
 }
 
-// initiate the class and return instance
-// private JfrogBase _instance = null
-public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
-    echo 'im here at jfrog.gvy getinstance'
-    // if (_instance == null) {
-    //     _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
-    //     return true
-    // } else {
-    //     echo 'instance already exists'
-    //     return false
-    // }
-}
-
-// public void UploadReports(String fromDir, String[] filenames) {
-//     echo 'im here at jfrog.gvy uploadreports'
-//     _instance.UploadReports(fromDir, filenames)
+// // initiate the class and return instance
+// // private JfrogBase _instance = null
+// public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+//     echo 'im here at jfrog.gvy getinstance'
+//     // if (_instance == null) {
+//     //     _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+//     //     return true
+//     // } else {
+//     //     echo 'instance already exists'
+//     //     return false
+//     // }
 // }
 
-return this
+// // public void UploadReports(String fromDir, String[] filenames) {
+// //     echo 'im here at jfrog.gvy uploadreports'
+// //     _instance.UploadReports(fromDir, filenames)
+// // }
+
+// return this
