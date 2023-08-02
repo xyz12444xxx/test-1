@@ -2,6 +2,7 @@
 import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 import groovy.transform.builder.Builder
 
+@Builder
 class JfrogBase {
     private String id
     private String serverUrl
