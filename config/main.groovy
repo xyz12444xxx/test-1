@@ -1,4 +1,4 @@
-def jfrog = evaluate(readTrusted('config/JfrogBase.groovy'))
+def jfrog = load('config/JfrogBase.groovy')
 
 pipeline {
     agent any
