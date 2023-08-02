@@ -83,4 +83,4 @@ class JfrogBase {
 // //     _instance.UploadReports(fromDir, filenames)
 // // }
 
-// return this
+return this
