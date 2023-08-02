@@ -1,7 +1,6 @@
-import config.Jfrog.JfrogBase
+package config
 
-// define the artifactory server
-JfrogBase jfrogBase = null
+JfrogBase jfrogBase
 
 pipeline {
     agent any

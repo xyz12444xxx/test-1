@@ -1,9 +1,1 @@
-// show how to import a class A in groovy
-
-// A.gvy
-class A {
-
-}
-
-// B.gvy
-import A
+// how to import 
