@@ -1,10 +1,10 @@
-import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
+package config
 
-// class JfrogBase {
-//     private String id
-//     private String serverUrl
-//     private String credentialsId
-//     private String reportsStorePath
+class JfrogBase {
+    private String id
+    private String serverUrl
+    private String credentialsId
+    private String reportsStorePath
 
 //     // constructor
 //     JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
@@ -65,7 +65,7 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 
 //     //     return allUploaded
 //     // }
-// }
+}
 
 // // initiate the class and return instance
 // def _instance = null
@@ -84,9 +84,3 @@ import org.jenkinsci.plugins.workflow.steps.FlowInterruptedException
 // //     echo 'im here at jfrog.gvy uploadreports'
 // //     _instance.UploadReports(fromDir, filenames)
 // // }
-
-public void printsomething() {
-    echo 'im here at jfrog.gvy printsomething'
-}
-
-return this
