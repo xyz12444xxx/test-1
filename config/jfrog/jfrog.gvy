@@ -5,7 +5,6 @@ class JfrogBase {
     private String serverUrl
     private String credentialsId
     private String reportsStorePath
-    private Artifactory server
 
     // constructor
     JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
@@ -13,10 +12,17 @@ class JfrogBase {
         this.serverUrl = serverUrl
         this.credentialsId = credentialsId
         this.reportsStorePath = reportsStorePath
+    }
 
+    boolean CreateServer() {
         // create artifactory server
         try {
-            server = Artifactory.server(serverUrl, credentialsId)
+            rtServer (
+                id: this.id,
+                url: this.serverUrl,
+                credentialsId: this.credentialsId
+                timeout: 10
+            )
         } catch (Exception e) {
             echo "Failed to create Artifactory server at constructor ${e}"
             throw new Exception("Failed to create Artifactory server")
@@ -38,7 +44,10 @@ class JfrogBase {
 
             // upload file, throw exception if failed
             try {
-                server.upload spec
+                rtUpload (
+                    serverId: this.id,
+                    spec: spec
+                )
             } catch (Exception e) {
                 echo "Failed to upload ${filename} to ${reportsStorePath}"
                 allUploaded = false
