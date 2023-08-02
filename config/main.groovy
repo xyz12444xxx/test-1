@@ -62,18 +62,18 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    // jfrog.uploadReports('target', (String[])['*.log'])
-                    rtUpload (
-                        serverId: 'artifactory-1',
-                        spec: """{
-                            "files": [
-                                {
-                                    "pattern": "target/*.log",
-                                    "target": "demo-work/logs/"
-                                }
-                            ]
-                        }"""
-                    )
+                    jfrog.uploadReports('target', (String[])['*.log'])
+                    // rtUpload (
+                    //     serverId: 'artifactory-1',
+                    //     spec: """{
+                    //         "files": [
+                    //             {
+                    //                 "pattern": "target/*.log",
+                    //                 "target": "demo-work/logs/"
+                    //             }
+                    //         ]
+                    //     }"""
+                    // )
                 }
                 
                 echo 'Archiving done....'

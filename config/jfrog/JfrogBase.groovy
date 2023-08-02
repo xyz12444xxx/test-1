@@ -73,7 +73,7 @@ class JfrogBase {
                             "files": [
                                 {
                                     "pattern": "target/*.log",
-                                    "target": "demo-work/logs/"
+                                    "target": "demo-work1/logs/"
                                 }
                             ]
                         }"""
