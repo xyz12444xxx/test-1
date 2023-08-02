@@ -1,4 +1,4 @@
-package config.jfrog
+package config
 
 class JfrogBase {
     private String id
