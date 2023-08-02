@@ -73,7 +73,7 @@ pipeline {
                     //         ]
                     //     }"""
                     // )
-                    jfrog.UploadReports('target', ['baseline_1.0.0.log'])
+                    jfrog.UploadReports('target', (String[])['baseline_1.0.0.log'])
                 }
                 
                 echo 'Archiving done....'
