@@ -6,7 +6,7 @@ public void init(String id, String serverUrl, String credentialsId, String repor
     echo serverUrl
     echo credentialsId
     echo reportsStorePath
-    
+
     if (!_instance) {
        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
     } else {
@@ -45,7 +45,6 @@ class JfrogBase {
                 timeout: 10
             )
         } catch (Exception e) {
-            echo "Failed to create Artifactory server at constructor ${e}"
             throw new Exception("Failed to create Artifactory server")
         }
     }
@@ -70,7 +69,6 @@ class JfrogBase {
                     spec: spec
                 )
             } catch (Exception e) {
-                echo "Failed to upload ${filename} to ${this.reportsStorePath}"
                 allUploaded = false
                 throw new Exception("Failed to upload ${filename} to ${this.reportsStorePath}")
             }
