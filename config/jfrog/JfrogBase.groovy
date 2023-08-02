@@ -54,8 +54,8 @@ class JfrogBase {
             def spec = """{
                 "files": [
                     {
-                        "pattern": "${this.repo}/${fromDir}/${filename}",
-                        "target": "${this.reportsStorePath}/"
+                        "pattern": "${fromDir}/${filename}",
+                        "target": "${this.repo}/${this.reportsStorePath}/"
                     }
                 ]
             }"""

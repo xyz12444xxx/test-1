@@ -11,7 +11,7 @@ pipeline {
         string (
             name: 'artifactory_repo',
             description: 'Artifactory repository',
-            defaultValue: 'demo-thales'
+            defaultValue: 'demo-work'
         )
         credentials (
             name: 'artifactory_cred_id',
