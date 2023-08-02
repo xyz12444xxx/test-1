@@ -1,4 +1,4 @@
-_instance = null
+private def _instance = null
 
 class JfrogBase {
     private String id
