@@ -1,4 +1,4 @@
-boolean _instance = false
+_instance = false
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
