@@ -64,13 +64,14 @@ class JfrogBase {
 //     // }
 }
 
-public JfrogBase _instance
+// public JfrogBase _instance
+private boolean instanceCreated = false
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     echo "im here at jfrog.gvy getinstance"
-    if (_instance == null) {
-        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+    if (!instanceCreated) {
+        def _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
         return true
     } else {
         echo 'instance already exists'
