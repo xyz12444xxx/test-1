@@ -1,4 +1,4 @@
-package config
+import config.JfrogBase
 
 JfrogBase jfrogBase
 
