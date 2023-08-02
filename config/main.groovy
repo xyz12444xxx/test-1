@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo 'Initiating....'
                 script {
-                    initiate()
+                    // initiate()
                 }
             }
         }
@@ -62,7 +62,17 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    jfrog.uploadReports('target', (String[])['*.log'])
+                    rtUpload (
+                        serverId: 'artifactory-1',
+                        spec: """{
+                            "files": [
+                                {
+                                    "pattern": "target/*.log",
+                                    "target": "logs/"
+                                }
+                            ]
+                        }"""
+                    )
                 }
                 
                 echo 'Archiving done....'
