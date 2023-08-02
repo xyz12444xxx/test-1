@@ -1,5 +1,3 @@
-package config
-
 class JfrogBase {
     private String id
     private String serverUrl
@@ -84,3 +82,5 @@ class JfrogBase {
 // //     echo 'im here at jfrog.gvy uploadreports'
 // //     _instance.UploadReports(fromDir, filenames)
 // // }
+
+return this
