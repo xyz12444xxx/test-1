@@ -1,42 +1,51 @@
-def server = Artifactory.server 'jfrog-1'
-def jfrogSpec = """{
-    "files": [
-        {
-            "pattern": "target/*.log",
-            "target": "logs/"
-        }
-    ]
-}"""
+import JfrogBase from './jfrog/jfrog.gvy'
+
+// define the artifactory server
+JfrogBase jfrogBase = null
 
 pipeline {
     agent any
-    // tools {
-    // }
+    parameters {
+        credentials (
+            name: 'artifactory_server_url',
+            description: 'Artifactory server url',
+            defaultValue: 'jfrog_server',
+            credentialType: 'Secret Text',
+            required: true
+        )
+        credentials (
+            name: 'artifactory_cred_id',
+            description: 'Artifactory credentials id',
+            defaultValue: 'jfrog_credentials',
+            credentialType: 'Username with password',
+            required: true
+        )
+    }
     stages {
-        stage('Build') {
-            // only build if there are changes in py file types
-            when {
-                changeset "**/*.py"
+        stage('Initiate') {
+            steps {
+                echo 'Initiating....'
+                script {
+                    // create artifactory server
+                    initiate()
+                }
             }
+        }
+        stage('Build') {
             steps {
                 echo 'Building..'
                 sh 'python3 --version'
                 sh 'python3 src/main.py'                
             }
         }
-        stage('Download') {            
-            // otherwise get the log from artifactory
-            when {
-                not {
-                    changeset "**/*.py"
-                }
-            }
-            steps {
-                script {
-                    server.download(jfrogSpec)
-                }
-            }
-        }
+        // stage('Download') {            
+        //     // otherwise get the log from artifactory
+        //     steps {
+        //         script {
+        //             server.download(jfrogSpec)
+        //         }
+        //     }
+        // }
         stage('Test') {
             steps {
                 echo 'Testing..'
@@ -50,16 +59,22 @@ pipeline {
         stage('Archive') {
             steps {
                 echo 'Archiving....'
-
-                // get the file that is generated in the build stage under the target folder
-                archiveArtifacts artifacts: 'target/*.log', fingerprint: true
-
                 script {
-                    server.upload(jfrogSpec)
+                    // upload reports to artifactory
+                    jfrogBase.UploadReports('target', ['*.log'])
                 }
                 
                 echo 'Archiving done....'
             }
         }
+    }
+}
+
+void initiate() {
+    // create artifactory server
+    try {
+        jfrogBase = new JfrogBase('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
+    } catch (Exception e) {
+        error "Failed to create Artifactory server"
     }
 }
