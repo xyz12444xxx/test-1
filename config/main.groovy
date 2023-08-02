@@ -1,5 +1,8 @@
 package config
 
+import config.jfrog.JfrogBase
+
+
 JfrogBase jfrogBase
 
 pipeline {
