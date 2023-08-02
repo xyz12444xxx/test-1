@@ -1,5 +1,6 @@
 
-def jfrogBaseClass = load './jfrog/jfrog.gvy'
+def jfrog = load './jfrog/jfrog.gvy'
+jfrog.JfrogBase jfrogBase
 
 pipeline {
     agent any
@@ -71,7 +72,7 @@ pipeline {
 void initiate() {
     // create artifactory server
     try {
-        jfrogBase = new jfrogBaseClass(params.artifactory_server_url, params.artifactory_cred_id, 'reports')
+        jfrogBase = new jfrog.JfrogBase(params.artifactory_server_url, params.artifactory_cred_id, 'reports')
     } catch (Exception e) {
         error "Failed to create Artifactory server"
     }
