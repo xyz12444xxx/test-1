@@ -1,5 +1,5 @@
 
-def jfrog = load './jfrog/jfrog.gvy'
+def jfrog = load 'config/jfrog/jfrog.gvy'
 jfrog.JfrogBase jfrogBase
 
 pipeline {
