@@ -66,7 +66,7 @@ class JfrogBase {
 }
 
 // // initiate the class and return instance
-private JfrogBase _instance = null
+def _instance = null
 // public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
 //     echo 'im here at jfrog.gvy getinstance'
 //     // if (_instance == null) {
