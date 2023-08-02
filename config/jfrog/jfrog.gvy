@@ -5,7 +5,7 @@ class JfrogBase {
     private String serverUrl
     private String credentialsId
     private String reportsStorePath
-    private Artifacroty.server server
+    private Artifactory.server server
 
     JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
         this.id = id
