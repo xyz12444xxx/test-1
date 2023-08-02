@@ -61,13 +61,11 @@ class JfrogBase {
     }
 }
 private JfrogBase _instance = null
-// public JfrogBase _instance
-instanceCreated = false
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     echo "im here at jfrog.gvy getinstance"
-    if (!instanceCreated) {
+    if (!_instance) {
         _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
         return true
     } else {
