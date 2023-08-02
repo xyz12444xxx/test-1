@@ -6,7 +6,7 @@ pipeline {
         string (
             name: 'artifactory_server_url',
             description: 'Artifactory server url',
-            defaultValue: 'http://172.21.0.2:8082/artifactory/demo-work'
+            defaultValue: 'http://172.21.0.2:8082/artifactory/'
         )
         string (
             name: 'artifactory_repo',
@@ -62,18 +62,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    // rtUpload (
-                    //     serverId: 'artifactory-1',
-                    //     spec: """{
-                    //         "files": [
-                    //             {
-                    //                 "pattern": "target/*.log",
-                    //                 "target": "logs/"
-                    //             }
-                    //         ]
-                    //     }"""
-                    // )
-                    jfrog.UploadReports('target', (String[])['baseline_1.0.0.log'])
+                    jfrog.uploadReports('target', (String[])['*.log'])
                 }
                 
                 echo 'Archiving done....'
@@ -85,7 +74,7 @@ pipeline {
 void initiate() {
     // create artifactory server
     try {
-        jfrog.init('artifactory-2', params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id, 'logs')
+        jfrog.init('artifactory-1', params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id, 'logs')
     } catch (Exception e) {
         echo "Failed to create Artifactory server-echo ${e}"
         error "Failed to create Artifactory server"
