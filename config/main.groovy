@@ -70,8 +70,8 @@ void initiate() {
 
     // create artifactory server    
     try {
-        def jb = load 'config/jfrog/jfrog.gvy'
-        m.jfrogBase = jb.CreateServer('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
+        m.jfrogBase = load 'config/jfrog/jfrog.gvy'
+        m.jfrogBase.CreateServer('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
     } catch (Exception e) {
         echo "Failed to create Artifactory server-echo ${e}"
         error "Failed to create Artifactory server"
