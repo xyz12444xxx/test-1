@@ -1,4 +1,5 @@
 // def jfrog = evaluate(readTrusted('config/JfrogBase.groovy'))
+package config
 
 JfrogBase jfrog
 
