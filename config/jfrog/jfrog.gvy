@@ -1,3 +1,5 @@
+package config.jfrog
+
 class JfrogBase {
     private String id
     private String serverUrl
