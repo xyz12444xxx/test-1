@@ -70,13 +70,13 @@ class JfrogBase {
 private JfrogBase _instance = null
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     echo 'im here at jfrog.gvy getinstance'
-    if (_instance == null) {
-        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
-        return true
-    } else {
-        echo 'instance already exists'
-        return false
-    }
+    // if (_instance == null) {
+    //     _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+    //     return true
+    // } else {
+    //     echo 'instance already exists'
+    //     return false
+    // }
 }
 
 public void UploadReports(String fromDir, String[] filenames) {
