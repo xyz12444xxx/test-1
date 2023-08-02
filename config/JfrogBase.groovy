@@ -1,10 +1,10 @@
-def _instance = false
+_instance = null
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     echo "im here at jfrog.gvy getinstance"
     if (_instance == false) {
-       def _tinstance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+       _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
     } else {
         echo 'instance already exists'
     }
