@@ -17,7 +17,7 @@ public void uploadReports(String fromDir, String[] filenames) {
     _instance.UploadReports(fromDir, filenames)
 }
 
-private class JfrogBase {
+class JfrogBase {
     private String id
     private String serverUrl
     private String credentialsId
