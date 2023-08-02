@@ -5,8 +5,9 @@ class JfrogBase {
     private String serverUrl
     private String credentialsId
     private String reportsStorePath
-    private Artifactory.server server
+    private Artifactory server
 
+    // constructor
     JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
         this.id = id
         this.serverUrl = serverUrl
@@ -14,11 +15,10 @@ class JfrogBase {
         this.reportsStorePath = reportsStorePath
 
         // create artifactory server
-        this.server = new Artifacroty.server(serverUrl, credentialsId)
-
-        // if there was issue, throw exception
-        if (server == null) {
-            echo "Failed to create Artifactory server"
+        try {
+            server = Artifactory.server(serverUrl, credentialsId)
+        } catch (Exception e) {
+            echo "Failed to create Artifactory server at constructor ${e}"
             throw new Exception("Failed to create Artifactory server")
         }
     }
