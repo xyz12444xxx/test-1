@@ -75,6 +75,7 @@ void initiate() {
         modules.jfrogBase = load 'config/jfrog/jfrog.gvy'
         modules.jfrogBase.GetInstance('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
     } catch (Exception e) {
+        echo "Failed to create Artifactory server-echo"
         error "Failed to create Artifactory server"
     }
 }
