@@ -5,10 +5,8 @@ public void init(String id, String serverUrl, String credentialsId, String repor
     echo "im here at jfrog.gvy getinstance"
     if (!isNullOrEmpty(_instance)) {
         _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
-        return true
     } else {
         echo 'instance already exists'
-        return false
     }
 }
 
@@ -17,7 +15,7 @@ public void uploadReports(String fromDir, String[] filenames) {
     _instance.UploadReports(fromDir, filenames)
 }
 
-public class JfrogBase {
+class JfrogBase {
     private String id
     private String serverUrl
     private String credentialsId
