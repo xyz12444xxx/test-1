@@ -64,7 +64,7 @@ class JfrogBase {
 //     // }
 }
 
-private JfrogBase _instance
+JfrogBase _instance
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
