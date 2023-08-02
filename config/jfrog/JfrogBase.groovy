@@ -1,14 +1,10 @@
 _instance = null
 
 // initiate the class and return instance
-public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
-    echo id
-    echo serverUrl
-    echo credentialsId
-    echo reportsStorePath
+public void init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
 
     if (!_instance) {
-       _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+       _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
     } else {
         echo 'instance already exists'
     }
@@ -22,13 +18,15 @@ public void uploadReports(String fromDir, String[] filenames) {
 class JfrogBase {
     private String id
     private String serverUrl
+    private String repo
     private String credentialsId
     private String reportsStorePath
 
     // constructor
-    JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+    JfrogBase(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
         this.id = id
         this.serverUrl = serverUrl
+        this.repo = repo
         this.credentialsId = credentialsId
         this.reportsStorePath = reportsStorePath
 
@@ -56,7 +54,7 @@ class JfrogBase {
             def spec = """{
                 "files": [
                     {
-                        "pattern": "${fromDir}/${filename}",
+                        "pattern": "${this.repo}/${fromDir}/${filename}",
                         "target": "${this.reportsStorePath}/"
                     }
                 ]
