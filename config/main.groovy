@@ -6,7 +6,7 @@ pipeline {
         string (
             name: 'artifactory_server_url',
             description: 'Artifactory server url',
-            defaultValue: 'http://"172.21.0.2:8082/artifactory/demo-work/',
+            defaultValue: 'http://172.21.0.2:8082/artifactory/demo-work/',
             required: true
         )
         credentials (
