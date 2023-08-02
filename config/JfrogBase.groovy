@@ -60,7 +60,7 @@ class JfrogBase {
         return allUploaded
     }
 }
-private JfrogBase _instance = null
+private JfrogBase _instance
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
