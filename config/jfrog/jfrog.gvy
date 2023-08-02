@@ -51,7 +51,7 @@ class JfrogBase {
 }
 
 // initiate the class and return instance
-public JfrogBase initiate(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+public JfrogBase GetInstance(String id, String serverUrl, String credentialsId, String reportsStorePath) {
     return new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
 }
 
