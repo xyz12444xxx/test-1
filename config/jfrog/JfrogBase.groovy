@@ -70,13 +70,13 @@ class JfrogBase {
                 rtUpload (
                     serverId: 'artifactory-1',
                     spec: """{
-                        "files": [
-                            {
-                                "pattern": "${fromDir}/${filename}",
-                                "target": "${this.repo}/${this.reportsStorePath}/"
-                            }
-                        ]
-                    }"""
+                            "files": [
+                                {
+                                    "pattern": "target/*.log",
+                                    "target": "demo-work/logs/"
+                                }
+                            ]
+                        }"""
                 )
             } catch (Exception e) {
                 allUploaded = false
