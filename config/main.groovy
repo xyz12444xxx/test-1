@@ -55,7 +55,7 @@ pipeline {
                 echo 'Archiving....'
                 script {
                     // upload reports to artifactory
-                    jfrog.uploadReports('target', ['*.log'])
+                    jfrog.uploadReports('target', new String[]{'report.html', 'report.json'})
                 }
                 
                 echo 'Archiving done....'
