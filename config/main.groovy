@@ -22,8 +22,13 @@ pipeline {
                 echo 'Initiating....'
                 script {
                     // create artifactory server
-                    jfrog.printsomething()
-                    // initiate()
+    try {
+        jfrog.printsomething()
+        // jfrog.CreateServer('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
+    } catch (Exception e) {
+        echo "Failed to create Artifactory server-echo ${e}"
+        error "Failed to create Artifactory server"
+    }
                 }
             }
         }
