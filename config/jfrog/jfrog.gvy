@@ -49,3 +49,5 @@ class JfrogBase {
         return allUploaded
     }
 }
+
+// return new JfrogBase(params.id, params.serverUrl, params.credentialsId, params.reportsStorePath)

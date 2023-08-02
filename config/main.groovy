@@ -1,7 +1,5 @@
-File jfrogBaseFile = new File("./jfrog/JfrogBase.groovy")
-Class jfrogBaseClass = new GroovyClassLoader(getClass().getClassLoader()).parseClass(jfrogBaseFile)
 
-GroovyObject jfrogBase
+def jfrogBaseClass = load 'jfrogBase.groovy'
 
 pipeline {
     agent any
@@ -73,7 +71,7 @@ pipeline {
 void initiate() {
     // create artifactory server
     try {
-        jfrogBase = (GroovyObject) jfrogBaseClass.newInstance('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
+        jfrogBase = new jfrogBaseClass(params.artifactory_server_url, params.artifactory_cred_id, 'reports')
     } catch (Exception e) {
         error "Failed to create Artifactory server"
     }
