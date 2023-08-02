@@ -1,4 +1,4 @@
-def jfrog = evaluate(readTrusted('config/jfrgo/jfrog.gvy'))
+def jfrog = evaluate(readTrusted('config/jfrog/jfrog.gvy'))
 
 pipeline {
     agent any
