@@ -1,4 +1,4 @@
-def jfrogBaseScript = load('config/jfrogBase.groovy')
+def jfrogBaseScript = load('jfrogBase.groovy')
 def jfrogBaseClass = jfrogBaseScript.getClasses().find { it.name == 'JfrogBase' }
 
 // create artifactory server
