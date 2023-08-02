@@ -1,4 +1,5 @@
-import config.*
+File jfrogBaseFile = new File("./jfrog/JfrogBase.groovy")
+Class JfrogBase = new GroovyClassLoader(getClass().getClassLoader()).parseClass(jfrogBaseFile)
 
 JfrogBase jfrogBase
 
