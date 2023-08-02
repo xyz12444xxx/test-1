@@ -1,9 +1,19 @@
+private String id
+private String serverUrl
+private String credentialsId
+private String reportsStorePath
+
 boolean CreateServer(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+    this.id = id
+    this.serverUrl = serverUrl
+    this.credentialsId = credentialsId
+    this.reportsStorePath = reportsStorePath
+
     try {
         rtServer (
-            id: id,
-            url: serverUrl,
-            credentialsId: credentialsId,
+            id: this.id,
+            url: this.serverUrl,
+            credentialsId: this.credentialsId,
             timeout: 10,
         )
     } catch (Exception e) {
