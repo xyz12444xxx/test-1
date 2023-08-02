@@ -1,4 +1,4 @@
-import config.Jfrog
+import config.Jfrog.JfrogBase
 
 // define the artifactory server
 JfrogBase jfrogBase = null
