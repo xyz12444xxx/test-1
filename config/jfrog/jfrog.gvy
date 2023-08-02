@@ -13,7 +13,7 @@ class JfrogBase {
         echo serverUrl
         echo credentialsId
         echo reportsStorePath
-        
+
         this.id = id
         this.serverUrl = serverUrl
         this.credentialsId = credentialsId
@@ -26,7 +26,7 @@ class JfrogBase {
             rtServer (
                 id: this.id,
                 url: this.serverUrl,
-                credentialsId: this.credentialsId
+                credentialsId: this.credentialsId,
                 timeout: 10
             )
         } catch (Exception e) {
