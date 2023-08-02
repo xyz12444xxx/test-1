@@ -4,21 +4,21 @@ class JfrogBase {
     private String credentialsId
     private String reportsStorePath
 
-//     // constructor
-//     JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
-//         echo 'im here at jfrogbase constructor'
-//         echo id
-//         echo serverUrl
-//         echo credentialsId
-//         echo reportsStorePath
+    // constructor
+    JfrogBase(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+        echo 'im here at jfrogbase constructor'
+        echo id
+        echo serverUrl
+        echo credentialsId
+        echo reportsStorePath
 
-//         this.id = id
-//         this.serverUrl = serverUrl
-//         this.credentialsId = credentialsId
-//         this.reportsStorePath = reportsStorePath
+        this.id = id
+        this.serverUrl = serverUrl
+        this.credentialsId = credentialsId
+        this.reportsStorePath = reportsStorePath
 
-//         // CreateServer()
-//     }
+        // CreateServer()
+    }
 
 //     // boolean CreateServer() {
 //     //     // create artifactory server
@@ -65,18 +65,19 @@ class JfrogBase {
 //     // }
 }
 
-// // initiate the class and return instance
-// def _instance = null
-// public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
-//     echo 'im here at jfrog.gvy getinstance'
-//     // if (_instance == null) {
-//     //     _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
-//     //     return true
-//     // } else {
-//     //     echo 'instance already exists'
-//     //     return false
-//     // }
-// }
+private JfrogBase _instance = null
+
+// initiate the class and return instance
+public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+    echo 'im here at jfrog.gvy getinstance'
+    if (_instance == null) {
+        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+        return true
+    } else {
+        echo 'instance already exists'
+        return false
+    }
+}
 
 // // public void UploadReports(String fromDir, String[] filenames) {
 // //     echo 'im here at jfrog.gvy uploadreports'

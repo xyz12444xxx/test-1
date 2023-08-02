@@ -1,7 +1,5 @@
 def jfrog = evaluate(readTrusted('config/JfrogBase.groovy'))
 
-def c = new JfrogBase('artifactory-1', 'http://adsfasdf', 'jfrog_credentials', 'logs')
-
 pipeline {
     agent any
     parameters {
@@ -24,13 +22,12 @@ pipeline {
                 echo 'Initiating....'
                 script {
                     // create artifactory server
-    try {
-        jfrog.printsomething()
-        // jfrog.CreateServer('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
-    } catch (Exception e) {
-        echo "Failed to create Artifactory server-echo ${e}"
-        error "Failed to create Artifactory server"
-    }
+                    try {
+                        jfrog.init('artifactory-1', params.artifactory_server_url, params.artifactory_cred_id, 'logs')
+                    } catch (Exception e) {
+                        echo "Failed to create Artifactory server-echo ${e}"
+                        error "Failed to create Artifactory server"
+                    }
                 }
             }
         }
