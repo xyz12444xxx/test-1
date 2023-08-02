@@ -1,6 +1,6 @@
 def jfrog = evaluate(readTrusted('config/JfrogBase.groovy'))
 
-def c = new jfrog.JfrogBase('artifactory-1', 'http://adsfasdf', 'jfrog_credentials', 'logs')
+def c = new JfrogBase('artifactory-1', 'http://adsfasdf', 'jfrog_credentials', 'logs')
 
 pipeline {
     agent any
