@@ -83,7 +83,7 @@
 // //     _instance.UploadReports(fromDir, filenames)
 // // }
 
-def printsomething() {
+public void printsomething() {
     echo 'im here at jfrog.gvy printsomething'
 }
 
