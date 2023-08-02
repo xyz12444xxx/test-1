@@ -25,9 +25,9 @@ pipeline {
         stage('Initiate') {
             steps {
                 echo 'Initiating....'
-                script {
-                    // initiate()
-                }
+                // script {
+                //     // initiate()
+                // }
             }
         }
         stage('Build') {
