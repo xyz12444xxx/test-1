@@ -1,5 +1,5 @@
 
-def jfrogBaseClass = load 'jfrogBase.groovy'
+def jfrogBaseClass = load './jfrog/jfrog.gvy'
 
 pipeline {
     agent any
