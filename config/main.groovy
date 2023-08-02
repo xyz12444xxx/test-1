@@ -25,9 +25,9 @@ pipeline {
         stage('Initiate') {
             steps {
                 echo 'Initiating....'
-                // script {
-                //     // initiate()
-                // }
+                script {
+                    initiate()
+                }
             }
         }
         stage('Build') {
@@ -62,17 +62,18 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    rtUpload (
-                        serverId: 'artifactory-1',
-                        spec: """{
-                            "files": [
-                                {
-                                    "pattern": "target/*.log",
-                                    "target": "logs/"
-                                }
-                            ]
-                        }"""
-                    )
+                    // rtUpload (
+                    //     serverId: 'artifactory-1',
+                    //     spec: """{
+                    //         "files": [
+                    //             {
+                    //                 "pattern": "target/*.log",
+                    //                 "target": "logs/"
+                    //             }
+                    //         ]
+                    //     }"""
+                    // )
+                    jfrog.UploadReports('target', ['baseline_1.0.0.log'])
                 }
                 
                 echo 'Archiving done....'
