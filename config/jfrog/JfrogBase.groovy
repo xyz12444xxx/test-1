@@ -51,20 +51,32 @@ class JfrogBase {
         boolean allUploaded = true
         // upload reports to artifactory
         for (filename in filenames) {
-            def spec = """{
-                "files": [
-                    {
-                        "pattern": "${fromDir}/${filename}",
-                        "target": "${this.repo}/${this.reportsStorePath}/"
-                    }
-                ]
-            }"""
+            // def spec = """{
+            //     "files": [
+            //         {
+            //             "pattern": "${fromDir}/${filename}",
+            //             "target": "${this.repo}/${this.reportsStorePath}/"
+            //         }
+            //     ]
+            // }"""
 
             // upload file, throw exception if failed
             try {
+                // rtUpload (
+                //     serverId: this.id,
+                //     spec: spec
+                // )
+
                 rtUpload (
-                    serverId: this.id,
-                    spec: spec
+                    serverId: 'artifactory-1',
+                    spec: """{
+                        "files": [
+                            {
+                                "pattern": "${fromDir}/${filename}",
+                                "target": "${this.repo}/${this.reportsStorePath}/"
+                            }
+                        ]
+                    }"""
                 )
             } catch (Exception e) {
                 allUploaded = false
