@@ -1,6 +1,23 @@
+private JfrogBase _instance = null
 
+// initiate the class and return instance
+public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
+    echo "im here at jfrog.gvy getinstance"
+    if (!isNullOrEmpty(_instance)) {
+        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
+        return true
+    } else {
+        echo 'instance already exists'
+        return false
+    }
+}
 
-class JfrogBase {
+public void uploadReports(String fromDir, String[] filenames) {
+    echo 'im here at jfrog.gvy uploadreports'
+    _instance.UploadReports(fromDir, filenames)
+}
+
+private class JfrogBase {
     private String id
     private String serverUrl
     private String credentialsId
@@ -59,24 +76,6 @@ class JfrogBase {
 
         return allUploaded
     }
-}
-private JfrogBase _instance
-
-// initiate the class and return instance
-public void init(String id, String serverUrl, String credentialsId, String reportsStorePath) {
-    echo "im here at jfrog.gvy getinstance"
-    if (_instance == null) {
-        _instance = new JfrogBase(id, serverUrl, credentialsId, reportsStorePath)
-        return true
-    } else {
-        echo 'instance already exists'
-        return false
-    }
-}
-
-public void uploadReports(String fromDir, String[] filenames) {
-    echo 'im here at jfrog.gvy uploadreports'
-    _instance.UploadReports(fromDir, filenames)
 }
 
 return this
