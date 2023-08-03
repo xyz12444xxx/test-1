@@ -1,4 +1,4 @@
-import config.jfrog
+import jfrog
 
 def jfrog = new JfrogBase()
 
