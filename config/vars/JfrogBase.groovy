@@ -70,7 +70,7 @@ class JfrogBase {
         //         //     spec: spec
         //         // )
 
-                ArtifactoryServer.rtUpload (
+                ArtifactoryServer.upload (
                     serverId: 'artifactory-1',
                     spec: """{
                             "files": [
