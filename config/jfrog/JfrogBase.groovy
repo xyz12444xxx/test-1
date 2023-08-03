@@ -1,5 +1,7 @@
 // import artifactory plugin
 import org.jfrog.*
+// workflow plugin
+import org.jenkinsci.plugins.workflow.*
 
 _instance = null
 
