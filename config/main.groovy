@@ -1,4 +1,4 @@
-jfrog = evaluate(readTrusted('config/jfrog/JfrogBase.groovy'))
+jfrog = evaluate(readTrusted('config/jfrog/jfrog-base.groovy'))
 
 jfrog = null
 
