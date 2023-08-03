@@ -1,4 +1,4 @@
-import jfrog;
+import org.jfrog;
 
 def jfrog = new JfrogBase()
 
