@@ -1,4 +1,5 @@
 
+import org.jfrog.hudson.pipeline.common.types.ArtifactoryServer
 // _instance = null
 
 // // initiate the class and return instance
