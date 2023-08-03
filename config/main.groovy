@@ -64,7 +64,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    jfrog.UploadReports('target', (String[])['*.log'])
+                    jfrog.uploadReports('target', (String[])['*.log'])
                     // rtUpload (
                     //     serverId: 'artifactory-1',
                     //     spec: """{
@@ -87,7 +87,7 @@ pipeline {
 void initiate() {
     // create artifactory server
     try {
-        jfrog = new JfrogBase('artifactory-2', params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id, 'logs')
+        jfrog.init('artifactory-2', params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id, 'logs')
     } catch (Exception e) {
         echo "Failed to create Artifactory server-echo ${e}"
         error "Failed to create Artifactory server"
