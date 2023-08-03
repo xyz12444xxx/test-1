@@ -1,4 +1,6 @@
-jfrog = evaluate(readTrusted('config/jfrog/JfrogBase.groovy'))
+import config.jfrog
+
+def jfrog = new JfrogBase()
 
 pipeline {
     agent any
@@ -25,9 +27,9 @@ pipeline {
         stage('Initiate') {
             steps {
                 echo 'Initiating....'
-                script {
-                    initiate()
-                }
+                // script {
+                //     initiate()
+                // }
             }
         }
         stage('Build') {
@@ -62,7 +64,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    jfrog.uploadReports('target', (String[])['*.log'])
+                    jfrog.UploadReports('target', (String[])['*.log'])
                     // rtUpload (
                     //     serverId: 'artifactory-1',
                     //     spec: """{
