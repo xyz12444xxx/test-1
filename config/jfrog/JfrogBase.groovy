@@ -69,17 +69,17 @@ class JfrogBase {
         //         //     spec: spec
         //         // )
 
-        //         rtUpload (
-        //             serverId: 'artifactory-1',
-        //             spec: """{
-        //                     "files": [
-        //                         {
-        //                             "pattern": "target/*.log",
-        //                             "target": "demo-work/logs/"
-        //                         }
-        //                     ]
-        //                 }"""
-        //         )
+                rtUpload (
+                    serverId: 'artifactory-1',
+                    spec: """{
+                            "files": [
+                                {
+                                    "pattern": "target/*.log",
+                                    "target": "demo-work/logs/"
+                                }
+                            ]
+                        }"""
+                )
         //     } catch (Exception e) {
         //         allUploaded = false
         //         throw new Exception("Failed to upload ${filename} to ${this.reportsStorePath}")
