@@ -1,5 +1,7 @@
 
-import org.jfrog.hudson.pipeline.common.types.ArtifactoryServer
+import org.jfrog.*
+import org.jfrog.hudson.*
+import org.jfrog.hudson.util.Credentials;
 // _instance = null
 
 // // initiate the class and return instance
@@ -22,6 +24,7 @@ class JfrogBase {
     private String repo
     private String credentialsId
     private String reportsStorePath
+    private ArtifactoryServer server
 
     // constructor
     JfrogBase(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
@@ -30,24 +33,24 @@ class JfrogBase {
         this.repo = repo
         this.credentialsId = credentialsId
         this.reportsStorePath = reportsStorePath
-
-        // CreateServer()
+        this.server = new createServer()
     }
 
-    boolean CreateServer() {
+    private ArtifactoryServer createServer() {
         // create artifactory server
         try {
-            ArtifactoryServer.rtServer (
-                id: this.id,
-                url: this.serverUrl,
-                credentialsId: this.credentialsId,
-                timeout: 10
+            return ArtifactoryServer(
+                this.id,
+                this.serverUrl,
+                this.credentialsId,                
+                new Credentials("", ""),
+                10
             )
         } catch (Exception e) {
             throw new Exception("Failed to create Artifactory server")
         }
 
-        return true
+        return null
     }
 
     boolean UploadReports(String fromDir, String[] filenames) {
