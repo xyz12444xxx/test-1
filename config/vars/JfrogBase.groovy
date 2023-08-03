@@ -47,7 +47,8 @@ class JfrogBase {
                 new CredentialsConfig("", "", ""),
                 10,
                 false,
-                3
+                3,
+                1
             )
         } catch (Exception e) {
             throw new Exception("Failed to create artifactory server, e: ${e}")
