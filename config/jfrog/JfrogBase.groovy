@@ -1,4 +1,3 @@
-package org.jfrog
 
 _instance = null
 
