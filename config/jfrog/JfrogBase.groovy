@@ -1,10 +1,12 @@
+// import artifactory plugin
+import org.jfrog.hudson.pipeline.common.types.ArtifactoryServer
+
 _instance = null
 
 // initiate the class and return instance
 public void init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
-
     if (!_instance) {
-       _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
+        _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
     } else {
         echo 'instance already exists'
     }
