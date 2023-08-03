@@ -37,7 +37,7 @@ class JfrogBase {
     boolean CreateServer() {
         // create artifactory server
         try {
-            rtServer (
+            ArtifactoryServer.rtServer (
                 id: this.id,
                 url: this.serverUrl,
                 credentialsId: this.credentialsId,
