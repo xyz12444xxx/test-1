@@ -1,7 +1,5 @@
 jfrog = evaluate(readTrusted('config/jfrog/jfrog-base.groovy'))
 
-jfrog = null
-
 pipeline {
     agent any
     parameters {
