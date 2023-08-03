@@ -3,7 +3,7 @@ _instance = null
 def init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
     if (!_instance) {
         _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath, 
-        Artifactory.newServer(id: id, url: serverUrl, credentialsId: credentialsId))
+        Artifactory.newServer(url: serverUrl, credentialsId: credentialsId))
     } else {
         echo 'instance already exists'
     }
@@ -30,7 +30,7 @@ class JfrogBase {
     private String id
     private String serverUrl
     private String credentialsId
-    
+
     public String repo
     public String reportsStorePath
     def server = null
