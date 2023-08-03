@@ -48,7 +48,7 @@ class JfrogBase {
                 10
             )
         } catch (Exception e) {
-            throw new Exception("Failed to create Artifactory server")
+            throw new Exception("Failed to create artifactory server, e: ${e}")
         }
 
         return null
