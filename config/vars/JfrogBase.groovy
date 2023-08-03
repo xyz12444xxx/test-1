@@ -33,13 +33,13 @@ class JfrogBase {
         this.repo = repo
         this.credentialsId = credentialsId
         this.reportsStorePath = reportsStorePath
-        this.server = new createServer()
+        this.server = createServer()
     }
 
     private ArtifactoryServer createServer() {
         // create artifactory server
         try {
-            return ArtifactoryServer(
+            return new ArtifactoryServer(
                 this.id,
                 this.serverUrl,
                 this.credentialsId,                
