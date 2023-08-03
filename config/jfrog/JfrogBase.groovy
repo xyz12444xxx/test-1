@@ -1,5 +1,5 @@
 // import artifactory plugin
-import org.jfrog.hudson.pipeline.common.types.ArtifactoryServer
+import org.jfrog.*
 
 _instance = null
 
