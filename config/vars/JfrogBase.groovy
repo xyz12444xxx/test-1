@@ -36,6 +36,7 @@ class JfrogBase {
         this.server = createServer()
     }
 
+    @NonCPS
     private ArtifactoryServer createServer() {
         // create artifactory server
         try {
