@@ -77,9 +77,7 @@ class JfrogBase {
         //         //     spec: spec
         //         // )
 
-                this.server.upload (
-                    serverId: 'artifactory-1',
-                    spec: """{
+                this.server.upload ("""{
                             "files": [
                                 {
                                     "pattern": "target/*.log",
