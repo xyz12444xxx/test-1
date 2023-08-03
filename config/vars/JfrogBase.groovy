@@ -43,7 +43,7 @@ class JfrogBase {
             return new ArtifactoryServer(
                 this.id,
                 this.serverUrl,
-                new Credentials(this.credentialsId, ""),               
+                new CredentialsConfig("", "", this.credentialsId, false),           
                 null,
                 10
             )
