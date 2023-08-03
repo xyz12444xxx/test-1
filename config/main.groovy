@@ -1,7 +1,7 @@
 // jfrog = evaluate(readTrusted('config/jfrog/JfrogBase.groovy'))
 @Library('jenkins-shared-library') _
 
-def jfrog = null
+jfrog = null
 
 pipeline {
     agent any
