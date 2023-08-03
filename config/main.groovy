@@ -1,4 +1,7 @@
-jfrog = evaluate(readTrusted('config/jfrog/JfrogBase.groovy'))
+// jfrog = evaluate(readTrusted('config/jfrog/JfrogBase.groovy'))
+@Library('jenkins-shared-library') _
+
+JfrogBase jfrog = null
 
 pipeline {
     agent any
@@ -62,7 +65,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    jfrog.uploadReports('target', (String[])['*.log'])
+                    jfrog.UploadReports('target', (String[])['*.log'])
                     // rtUpload (
                     //     serverId: 'artifactory-1',
                     //     spec: """{
@@ -85,7 +88,7 @@ pipeline {
 void initiate() {
     // create artifactory server
     try {
-        jfrog.init('artifactory-2', params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id, 'logs')
+        jfrog = new JfrogBase('artifactory-2', params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id, 'logs')
     } catch (Exception e) {
         echo "Failed to create Artifactory server-echo ${e}"
         error "Failed to create Artifactory server"

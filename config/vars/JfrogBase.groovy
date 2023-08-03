@@ -1,19 +1,19 @@
 
-_instance = null
+// _instance = null
 
-// initiate the class and return instance
-public void init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
-    if (!_instance) {
-        _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
-    } else {
-        echo 'instance already exists'
-    }
-}
+// // initiate the class and return instance
+// public void init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
+//     if (!_instance) {
+//         _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
+//     } else {
+//         echo 'instance already exists'
+//     }
+// }
 
-public void uploadReports(String fromDir, String[] filenames) {
-    echo 'im here at jfrog.gvy uploadreports'
-    _instance.UploadReports(fromDir, filenames)
-}
+// public void uploadReports(String fromDir, String[] filenames) {
+//     echo 'im here at jfrog.gvy uploadreports'
+//     _instance.UploadReports(fromDir, filenames)
+// }
 
 class JfrogBase {
     private String id
@@ -90,4 +90,4 @@ class JfrogBase {
     }
 }
 
-return this
+// return this
