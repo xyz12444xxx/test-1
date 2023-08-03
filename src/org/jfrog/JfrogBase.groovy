@@ -1,20 +1,20 @@
 package org.jfrog
 
-// _instance = null
+_instance = null
 
-// // initiate the class and return instance
-// public void init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
-//     if (!_instance) {
-//         _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
-//     } else {
-//         echo 'instance already exists'
-//     }
-// }
+// initiate the class and return instance
+public void init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
+    if (!_instance) {
+        _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
+    } else {
+        echo 'instance already exists'
+    }
+}
 
-// public void uploadReports(String fromDir, String[] filenames) {
-//     echo 'im here at jfrog.gvy uploadreports'
-//     _instance.UploadReports(fromDir, filenames)
-// }
+public void uploadReports(String fromDir, String[] filenames) {
+    echo 'im here at jfrog.gvy uploadreports'
+    _instance.UploadReports(fromDir, filenames)
+}
 
 class JfrogBase {
     private String id
@@ -30,17 +30,6 @@ class JfrogBase {
         this.repo = repo
         this.credentialsId = credentialsId
         this.reportsStorePath = reportsStorePath
-
-        // CreateServer()
-    }
-
-    // default constructor
-    JfrogBase() {
-        this.id = 'artifactory-1'
-        this.serverUrl = 'http://localhost:8081/artifactory'
-        this.repo = 'demo-work'
-        this.credentialsId = 'artifactory-cred'
-        this.reportsStorePath = 'logs'
 
         // CreateServer()
     }
@@ -64,42 +53,42 @@ class JfrogBase {
     boolean UploadReports(String fromDir, String[] filenames) {
         boolean allUploaded = true
         // upload reports to artifactory
-        for (filename in filenames) {
-            // def spec = """{
-            //     "files": [
-            //         {
-            //             "pattern": "${fromDir}/${filename}",
-            //             "target": "${this.repo}/${this.reportsStorePath}/"
-            //         }
-            //     ]
-            // }"""
+        // for (filename in filenames) {
+        //     // def spec = """{
+        //     //     "files": [
+        //     //         {
+        //     //             "pattern": "${fromDir}/${filename}",
+        //     //             "target": "${this.repo}/${this.reportsStorePath}/"
+        //     //         }
+        //     //     ]
+        //     // }"""
 
-            // upload file, throw exception if failed
-            try {
-                // rtUpload (
-                //     serverId: this.id,
-                //     spec: spec
-                // )
+        //     // upload file, throw exception if failed
+        //     try {
+        //         // rtUpload (
+        //         //     serverId: this.id,
+        //         //     spec: spec
+        //         // )
 
-                rtUpload (
-                    serverId: 'artifactory-1',
-                    spec: """{
-                            "files": [
-                                {
-                                    "pattern": "target/*.log",
-                                    "target": "demo-work/logs/"
-                                }
-                            ]
-                        }"""
-                )
-            } catch (Exception e) {
-                allUploaded = false
-                throw new Exception("Failed to upload ${filename} to ${this.reportsStorePath}")
-            }
-        }
+        //         rtUpload (
+        //             serverId: 'artifactory-1',
+        //             spec: """{
+        //                     "files": [
+        //                         {
+        //                             "pattern": "target/*.log",
+        //                             "target": "demo-work/logs/"
+        //                         }
+        //                     ]
+        //                 }"""
+        //         )
+        //     } catch (Exception e) {
+        //         allUploaded = false
+        //         throw new Exception("Failed to upload ${filename} to ${this.reportsStorePath}")
+        //     }
+        // }
 
         return allUploaded
     }
 }
 
-// return this
+return this
