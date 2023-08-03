@@ -44,7 +44,7 @@ class JfrogBase {
                 this.id,
                 this.serverUrl,
                 new CredentialsConfig("", "", this.credentialsId, false),           
-                null,
+                new CredentialsConfig("", "", ""),
                 10
             )
         } catch (Exception e) {
