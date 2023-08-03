@@ -1,5 +1,4 @@
-// jfrog = evaluate(readTrusted('config/jfrog/JfrogBase.groovy'))
-@Library('jenkins-shared-library') _
+jfrog = evaluate(readTrusted('config/jfrog/JfrogBase.groovy'))
 
 jfrog = null
 
