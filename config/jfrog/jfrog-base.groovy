@@ -3,6 +3,7 @@ _instance = null
 def init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
     if (!_instance) {
         _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
+    }
 }
 
 def uploadReports(String fromDir, String[] filenames) {    
