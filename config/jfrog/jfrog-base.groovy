@@ -24,6 +24,10 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 
 def uploadReports(String fromDir, String[] filenames) {
     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+        // pwd and show files
+        sh "pwd"
+        sh "ls -l"
+        sh "ls -l ${fromDir}"
         for (String filename : filenames) {
             def result = sh(script: "curl -k -T ${fromDir}/${filename} ${this.serverUrl}/artifactory/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
             echo "${result}"
