@@ -3,10 +3,8 @@ _instance = null
 def init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
     node {
         // call curl to check if server is up in a shell script
-        def serverUp = sh(script: "curl -s -o /dev/null -w \"%{http_code}\" ${serverUrl}api/system/ping", returnStdout: true).trim()
-        if (serverUp != '200') {
-            echo 'Artifactory server is not up'
-        }
+        def serverUp = sh(script: "curl -k ${serverUrl}/api/system/ping -u ${credentialsId}", returnStdout: true).trim()
+        echo "server: ${serverUp}"
     }
 }
 
