@@ -1,19 +1,44 @@
-_instance = null
+// _instance = null
+private String serverUrl
+private String repo
+private String credentialsId
+private String reportsStorePath
 
 def init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
+    this.serverUrl = serverUrl
+    this.repo = repo
+    this.credentialsId = credentialsId
+    this.reportsStorePath = reportsStorePath
     node {
         // with credentials to get username and password from the jenkins credentials store
         withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
             // call curl to check if server is up in a shell script
-            def serverUp = sh(script: "curl -k ${serverUrl}/api/system/ping -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+            def server = sh(script: "curl -k ${this.serverUrl}/api/system/ping -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
             // do not show password in the variable
-            serverUp = serverUp.replaceAll("${password}", "********")
-            echo "server: ${serverUp}"
+            if (server != 'OK') {
+                echo "Server ${this.serverUrl} is not up"
+            }
         }
     }
 }
 
 def uploadReports(String fromDir, String[] filenames) {
+    // node {
+    //     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+    //         for (String filename : filenames) {
+    //             def file = "${fromDir}/${filename}"
+    //             if (file.exists()) {
+    //                 // PUT method
+    //                 def server = sh(script: "curl -k -XPUT ${serverUrl}/
+    //                 if (server != 'OK') {
+    //                     echo "Failed to upload ${filename} to ${serverUrl}/api/storage/${repo}/${reportsStorePath}/${filename}"
+    //                 }
+    //             } else {
+    //                 echo "File ${file} does not exist"
+    //             }
+    //         }
+    //     }
+    // }
 }
 
 class JfrogBase {
