@@ -62,7 +62,7 @@ pipeline {
                 // archiveArtifacts artifacts: 'target/baseline_1.0.0.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    jfrog.uploadReports('/target', (String[])['baseline_1.0.0.log'])
+                    jfrog.uploadReports('target', (String[])['baseline_1.0.0.log'])
                     // rtUpload (
                     //     serverId: 'artifactory-1',
                     //     spec: """{
