@@ -29,7 +29,7 @@ def uploadReports(String fromDir, String[] filenames) {
         // sh "ls -l"
         // sh "ls -l ${fromDir}"
         for (String filename : filenames) {
-            def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/artifactory/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+            def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
             echo "${result}"
         }
     }
