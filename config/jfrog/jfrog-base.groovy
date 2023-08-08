@@ -23,22 +23,14 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 }
 
 def uploadReports(String fromDir, String[] filenames) {
-    // node {
-    //     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-    //         for (String filename : filenames) {
-    //             def file = "${fromDir}/${filename}"
-    //             if (file.exists()) {
-    //                 // PUT method
-    //                 def server = sh(script: "curl -k -XPUT ${serverUrl}/
-    //                 if (server != 'OK') {
-    //                     echo "Failed to upload ${filename} to ${serverUrl}/api/storage/${repo}/${reportsStorePath}/${filename}"
-    //                 }
-    //             } else {
-    //                 echo "File ${file} does not exist"
-    //             }
-    //         }
-    //     }
-    // }
+    node {
+        withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+            for (String filename : filenames) {
+                def result = sh(script: "curl -k -T ${fromDir}/${filename} ${this.serverUrl}/artifactory/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+                echo "${result}"
+            }
+        }
+    }
 }
 
 class JfrogBase {
