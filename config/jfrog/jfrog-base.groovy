@@ -8,9 +8,9 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 
 def uploadReports(String fromDir, String[] filenames) {    
     // use REST API from artifactory to check if server is up
-    def url = new URL(serverUrl + 'api/system/ping')
+    def url = new URL(_instance.serverUrl + 'api/system/ping')
     def connection = url.openConnection()
-    withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+    withCredentials([usernamePassword(credentialsId: _instance.credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         connection.setRequestProperty("Authorization", "Basic " + "${USERNAME}:${PASSWORD}".bytes.encodeBase64().toString())
     }
 
@@ -23,9 +23,9 @@ def uploadReports(String fromDir, String[] filenames) {
 }
 
 class JfrogBase {
-    private String id
-    private String serverUrl
-    private String credentialsId
+    public String id
+    public String serverUrl
+    public String credentialsId
 
     public String repo
     public String reportsStorePath
