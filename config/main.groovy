@@ -59,7 +59,7 @@ pipeline {
             steps {
                 echo 'Archiving....'
                 // get the file that is generated in the build stage under the target folder
-                archiveArtifacts artifacts: 'target/*.log', fingerprint: true
+                archiveArtifacts artifacts: 'target/baseline_1.0.0.log', fingerprint: true
                 script {
                     // upload reports to artifactory
                     jfrog.uploadReports('target', (String[])['*.log'])
