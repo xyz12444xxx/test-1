@@ -1,25 +1,16 @@
 _instance = null
 
 def init(String id, String serverUrl, String repo, String credentialsId, String reportsStorePath) {
-    if (!_instance) {
-        _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath)
+    node {
+        // call curl to check if server is up in a shell script
+        def serverUp = sh(script: "curl -s -o /dev/null -w \"%{http_code}\" ${serverUrl}api/system/ping", returnStdout: true).trim()
+        if (serverUp != '200') {
+            echo 'Artifactory server is not up'
+        }
     }
 }
 
-def uploadReports(String fromDir, String[] filenames) {    
-    // use REST API from artifactory to check if server is up
-    def url = new URL(_instance.serverUrl + 'api/system/ping')
-    def connection = url.openConnection()
-    withCredentials([usernamePassword(credentialsId: _instance.credentialsId, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-        connection.setRequestProperty("Authorization", "Basic " + "${USERNAME}:${PASSWORD}".bytes.encodeBase64().toString())
-    }
-
-    connection.connect()
-    if (connection.responseCode != 200) {
-        echo 'Artifactory server is not up'
-    }
-
-    echo 'Artifactory server is up'
+def uploadReports(String fromDir, String[] filenames) {
 }
 
 class JfrogBase {
