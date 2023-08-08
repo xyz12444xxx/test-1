@@ -5,7 +5,7 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
         _instance = new JfrogBase(id, serverUrl, repo, credentialsId, reportsStorePath, 
         Artifactory.newServer(url: serverUrl, credentialsId: credentialsId))
 
-        sh "curl ${serverUrl}"
+        sh "curl ${serverUrl}/api/system/ping"
     } else {
         echo 'instance already exists'
     }
