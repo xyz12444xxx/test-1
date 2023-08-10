@@ -53,7 +53,7 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
         }
 
         // zip the temporary folder
-        sh "tar -czf ${zipFilename} -C ${tempDir} ."
+        sh "tar -cvf ${zipFilename} -C ${tempDir} ."
         sh "ls -l"
 
         // delete the temporary folder
