@@ -52,8 +52,7 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
             sh "ls -l ${tempDir}"
         }
 
-        // zip using jenkins zip step
-        sh "zip -r ${zipFilename} ${tempDir}"
+        zip zipFile: "${zipFilename}", archive: false, dir: "${tempDir}"
 
 
         // delete the temporary folder
