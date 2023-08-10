@@ -24,14 +24,15 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 
 def uploadReports(String fromDir, String[] filenames) {
     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        if (!copyAndZipFiles(filenames, fromDir, "reports")) {
+        String zipFilename = "reports1"
+        if (!copyAndZipFiles(filenames, fromDir, zipFilename)) {
             echo "Failed to zip files"
             return
         }
 
         // def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         // pass the zipped file and show upload speed progress bar
-        def result = sh(script: "curl -XPUT --progress-bar -k -T reports.zip ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.zip -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+        def result = sh(script: "curl -XPUT --progress-bar -k -T ${zipFilename}.zip ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${zipFilename}.zip -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         echo "${result}"
     }
 }
