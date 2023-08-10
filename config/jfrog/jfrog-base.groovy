@@ -51,7 +51,7 @@ def uploadReports(String fromDir, String[] filenames) {
 
         // def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         // pass the zipped file and show upload speed progress bar
-        def result = sh(script: "curl -XPUT --progress-bar -k -T reports.gz ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.zip -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+        def result = sh(script: "curl -XPUT --progress-bar -k -T reports.gz ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.gz -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         echo "${result}"
     }
 }
@@ -68,7 +68,7 @@ private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename)
     }
     // tar files
     try {
-        sh "tar -czf ${zipFilename}.gz ${toDir}"
+        sh "tar -cvf ${zipFilename}.gz ${toDir}"
     } catch (Exception e) {
         echo "Failed to zip files in ${toDir}"
         return false
