@@ -28,11 +28,45 @@ def uploadReports(String fromDir, String[] filenames) {
         // sh "pwd"
         // sh "ls -l"
         // sh "ls -l ${fromDir}"
+        String[] filepaths
         for (String filename : filenames) {
-            def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
-            echo "${result}"
+            // sh ls to see filenames with pattern, then append to filepaths
+            filepaths += sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim()
+            echo "${filepaths}"
         }
+        if (!copyAndZipFiles(filepaths, fromDir, "reports.zip")) {
+            echo "Failed to zip files"
+            return
+        }
+
+        // def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+        // pass the zipped file and show upload speed progress bar
+        def result = sh(script: "curl -XPUT --progress-bar -k -T reports.zip ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.zip -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+        echo "${result}"
     }
+}
+
+private boolean copyAndZipFiles(String[] filepaths, String toDir, String zipFilename) {
+    // copy files to a directory
+    for (String filepath : filepaths) {
+        sh "cp ${filepath} ${toDir}"
+    }
+    // zip the files
+    sh "zip -r ${zipFilename} ${toDir}"
+    // check if the zip file exists
+    return fileExists(zipFilename)
+}
+
+private boolean fileExists(String filename) {
+    return fileExists(filename, false)
+}
+
+private boolean fileExists(String filename, boolean show) {
+    if (show) {
+        sh "ls -l ${filename}"
+    }
+    def result = sh(script: "ls -l ${filename}", returnStdout: true).trim()
+    return result != null && result != ''
 }
 
 class JfrogBase {
