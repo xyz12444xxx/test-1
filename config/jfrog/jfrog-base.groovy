@@ -28,7 +28,7 @@ def uploadReports(String fromDir, String[] filenames) {
         // sh "pwd"
         // sh "ls -l"
         // sh "ls -l ${fromDir}"
-        def filepaths = []
+        List<String> filepaths = []
         for (String filename : filenames) {
             // sh ls to see filenames with pattern, then append to filepaths
             filepaths.add(sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim())
@@ -46,7 +46,7 @@ def uploadReports(String fromDir, String[] filenames) {
     }
 }
 
-private boolean copyAndZipFiles(String[] filepaths, String toDir, String zipFilename) {
+private boolean copyAndZipFiles(List<String> filepaths, String toDir, String zipFilename) {
     // copy files to a directory
     for (String filepath : filepaths) {
         try {
