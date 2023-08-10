@@ -66,8 +66,13 @@ private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename)
             return false
         }
     }
-    // zip the files
-    sh "zip -r ${zipFilename} ${toDir}"
+    // tar files
+    try {
+        sh "tar -czf ${zipFilename} ${toDir}"
+    } catch (Exception e) {
+        echo "Failed to zip files in ${toDir}"
+        return false
+    }
     // check if the zip file exists
     return fileExists(zipFilename)
 }
