@@ -44,7 +44,7 @@ def uploadReports(String fromDir, String[] filenames) {
             }
             echo "${filepaths}"
         }
-        if (!copyAndZipFiles(filepaths, "temp", "reports.zip")) {
+        if (!copyAndZipFiles(filepaths, "temp", "reports")) {
             echo "Failed to zip files"
             return
         }
@@ -68,7 +68,7 @@ private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename)
     }
     // tar files
     try {
-        sh "tar -czf ${zipFilename} ${toDir}/*"
+        sh "tar -czf ${zipFilename}.gz ${toDir}/*"
     } catch (Exception e) {
         echo "Failed to zip files in ${toDir}"
         return false
