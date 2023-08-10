@@ -60,14 +60,13 @@ private boolean copyAndZipFiles(def fileFullPaths, String toDir, String zipFilen
     // copy files to a directory
     for (String file : fileFullPaths) {
         try {
-            sh "cp ${file} ${toDir}/${file}"
+            sh "cp ${file} ${toDir}"    
+            sh "ls -l temp"
         } catch (Exception e) {
             echo "Failed to copy file ${file} to ${toDir}"
             return false
         }
     }
-    
-    sh "ls -l temp"
     // tar files
     try {
         sh "tar -cvf ${zipFilename}.gz ${toDir}"
