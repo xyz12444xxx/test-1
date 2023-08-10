@@ -31,7 +31,17 @@ def uploadReports(String fromDir, String[] filenames) {
         def filepaths = []
         for (String filename : filenames) {
             // sh ls to see filenames with pattern, then append to filepaths
-            filepaths.add(sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim())
+            // filepaths.add(sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim())
+            // seperate filesnames in a seperate index
+            // but a filename can be a pattern, so sh ls will give a list of files, but not in list format
+            // so we need to split the string into a list
+            String files = sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim()
+            echo "${files}"
+            // split the string into a list
+            String[] filesList = files.split('\n')
+            for (String file : filesList) {
+                filepaths.add(file)
+            }
             echo "${filepaths}"
         }
         if (!copyAndZipFiles(filepaths, fromDir, "reports.zip")) {
