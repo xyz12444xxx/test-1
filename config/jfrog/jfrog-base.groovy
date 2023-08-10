@@ -24,7 +24,7 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 
 def uploadReports(String fromDir, String[] filenames) {
     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        if (!copyAndZipFiles(filenames, fromDir, "reports.zip")) {
+        if (!copyAndZipFiles(filenames, fromDir, "reports")) {
             echo "Failed to zip files"
             return
         }
@@ -37,28 +37,18 @@ def uploadReports(String fromDir, String[] filenames) {
 }
 
 private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFilename) {
-    // copy all the files to temporary folder
-    // then zip the folder and name it
-    // then delete the temporary folder
-
-    // create a temporary folder
     try {
-        def tempDir = sh(script: "mktemp -d", returnStdout: true).trim()
-        echo "tempDir: ${tempDir}"
+        // create a folder
+        // copy files to the folder
+        // zip the folder
 
-        // copy files to the temporary folder
+        sh "mkdir ${zipFilename}"
         for (String filename : filenames) {
-            sh "cp ${fromDir}/${filename} ${tempDir}"
-            sh "ls -l ${tempDir}"
+            sh "cp ${fromDir}/${filename} ${zipFilename}"
         }
-
-        dir("${tempDir}") {
-            sh "ls -l"
-            zip zipFile: "${zipFilename}", archive: false
-        }
-
-        // delete the temporary folder
-        sh "rm -rf ${tempDir}"
+        
+        sh "ls -l"
+        zip zipFile: "${zipFilename}.zip", archive: false
     } catch (Exception e) {
         echo "Failed to copy and zip files-echo ${e}"
         return false
