@@ -24,14 +24,14 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 
 def uploadReports(String fromDir, String[] filenames) {
     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        if (!copyAndZipFiles(filenames, fromDir, "reports.tar.gz")) {
+        if (!copyAndZipFiles(filenames, fromDir, "reports.zip")) {
             echo "Failed to zip files"
             return
         }
 
         // def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         // pass the zipped file and show upload speed progress bar
-        def result = sh(script: "curl -XPUT --progress-bar -k -T reports.gz ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.gz -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+        def result = sh(script: "curl -XPUT --progress-bar -k -T reports.zip ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.gz -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         echo "${result}"
     }
 }
@@ -52,9 +52,9 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
             sh "ls -l ${tempDir}"
         }
 
-        // zip the temporary folder
-        sh "tar -zcvf ${zipFilename} -C ${tempDir} ."
-        sh "ls -l"
+        // zip using jenkins zip step
+        sh "zip -r ${zipFilename} ${tempDir}"
+
 
         // delete the temporary folder
         sh "rm -rf ${tempDir}"
