@@ -73,7 +73,7 @@ private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename)
         echo "Failed to zip files in ${toDir}"
         return false
     }
-    sh "ls -l"
+    sh "ls -l temp"
     // check if the zip file exists
     return true
 }
