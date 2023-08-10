@@ -42,7 +42,7 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
         // copy files to the folder
         // zip the folder
 
-        sh "mkdir ${zipFilename}"
+        sh "mkdir ${zipFilename}_temp"
         for (String filename : filenames) {
             sh "cp ${fromDir}/${filename} ${zipFilename}_temp"
         }
