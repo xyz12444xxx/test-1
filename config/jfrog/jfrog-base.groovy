@@ -68,7 +68,7 @@ private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename)
     }
     // tar files
     try {
-        sh "tar -czft ${zipFilename}.gz ${toDir}"
+        sh "tar -czf ${zipFilename}.gz ${toDir}"
     } catch (Exception e) {
         echo "Failed to zip files in ${toDir}"
         return false
