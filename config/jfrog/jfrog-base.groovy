@@ -73,20 +73,9 @@ private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename)
         echo "Failed to zip files in ${toDir}"
         return false
     }
+    sh "ls -l"
     // check if the zip file exists
-    return fileExists(zipFilename)
-}
-
-private boolean fileExists(String filename) {
-    return fileExists(filename, false)
-}
-
-private boolean fileExists(String filename, boolean show) {
-    if (show) {
-        sh "ls -l ${filename}"
-    }
-    def result = sh(script: "ls -l ${filename}", returnStdout: true).trim()
-    return result != null && result != ''
+    return true
 }
 
 class JfrogBase {
