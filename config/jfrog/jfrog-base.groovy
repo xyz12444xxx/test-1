@@ -31,7 +31,7 @@ def uploadReports(String fromDir, String[] filenames) {
         String[] filepaths = []
         for (String filename : filenames) {
             // sh ls to see filenames with pattern, then append to filepaths
-            filepaths += sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim()
+            filepaths.add(sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim())
             echo "${filepaths}"
         }
         if (!copyAndZipFiles(filepaths, fromDir, "reports.zip")) {
