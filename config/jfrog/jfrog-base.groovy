@@ -42,7 +42,7 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
         // copy files to the folder
         // zip the folder
 
-        sh "mkdir ${zipFilename}_temp"
+        sh "mkdir -p ${zipFilename}_temp"
         for (String filename : filenames) {
             sh "cp ${fromDir}/${filename} ${zipFilename}_temp"
         }
@@ -50,6 +50,10 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
         sh "ls -l"
         sh "ls -l ${zipFilename}_temp"
         zip zipFile: "${zipFilename}.zip", archive: false, dir: "${zipFilename}_temp", overwrite: true
+        
+        
+        sh "ls -l"
+        sh "ls -l ${zipFilename}_temp"
     } catch (Exception e) {
         echo "Failed to copy and zip files-echo ${e}"
         return false
