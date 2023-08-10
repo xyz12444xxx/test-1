@@ -24,7 +24,7 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 
 def uploadReports(String fromDir, String[] filenames) {
     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        if (!copyAndZipFiles(filenames, fromDir, "reports.gz")) {
+        if (!copyAndZipFiles(filenames, fromDir, "reports.tar.gz")) {
             echo "Failed to zip files"
             return
         }
