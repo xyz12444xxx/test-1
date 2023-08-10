@@ -48,11 +48,7 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
             sh "cp ${fromDir}/${filename} ${zipFilename}_temp"
         }
         
-        sh "ls -l"
-        sh "ls -l ${zipFilename}_temp"
-        zip zipFile: "${zipFilename}.zip", archive: false, dir: "${zipFilename}_temp", overwrite: true
-        
-        
+        zip zipFile: "${zipFilename}.zip", archive: false, dir: "target", overwrite: true
         sh "ls -l"
         sh "ls -l ${zipFilename}_temp"
     } catch (Exception e) {
