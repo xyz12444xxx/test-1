@@ -49,7 +49,12 @@ def uploadReports(String fromDir, String[] filenames) {
 private boolean copyAndZipFiles(String[] filepaths, String toDir, String zipFilename) {
     // copy files to a directory
     for (String filepath : filepaths) {
-        sh "cp ${filepath} ${toDir}"
+        try {
+            sh "cp ${filepath} ${toDir}"
+        } catch (Exception e) {
+            echo "Failed to copy file ${filepath} to ${toDir}"
+            return false
+        }
     }
     // zip the files
     sh "zip -r ${zipFilename} ${toDir}"
