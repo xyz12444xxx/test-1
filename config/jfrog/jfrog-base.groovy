@@ -28,7 +28,7 @@ def uploadReports(String fromDir, String[] filenames) {
         // sh "pwd"
         // sh "ls -l"
         // sh "ls -l ${fromDir}"
-        String[] filepaths = []
+        def filepaths = []
         for (String filename : filenames) {
             // sh ls to see filenames with pattern, then append to filepaths
             filepaths.add(sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim())
