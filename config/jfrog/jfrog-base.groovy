@@ -56,18 +56,18 @@ def uploadReports(String fromDir, String[] filenames) {
     }
 }
 
-private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename) {
+private boolean copyAndZipFiles(def fileFullPaths, String toDir, String zipFilename) {
     // copy files to a directory
-    for (String filepath : filepaths) {
+    for (String file : fileFullPaths) {
         try {
-            sh "cp ${filepath} ${toDir}"
+            sh "cp ${file} ${toDir}/${file}"
         } catch (Exception e) {
-            echo "Failed to copy file ${filepath} to ${toDir}"
+            echo "Failed to copy file ${file} to ${toDir}"
             return false
         }
     }
     
-        sh "ls -l temp"
+    sh "ls -l temp"
     // tar files
     try {
         sh "tar -cvf ${zipFilename}.gz ${toDir}"
