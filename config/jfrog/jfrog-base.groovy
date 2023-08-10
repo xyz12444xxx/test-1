@@ -51,7 +51,7 @@ def uploadReports(String fromDir, String[] filenames) {
 
         // def result = sh(script: "curl -XPUT -k -T ${fromDir}/${filename} ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/${filename} -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         // pass the zipped file and show upload speed progress bar
-        def result = sh(script: "curl -XPUT --progress-bar -k -T temp/reports.zip ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.zip -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
+        def result = sh(script: "curl -XPUT --progress-bar -k -T reports.zip ${this.serverUrl}/${this.repo}/${this.reportsStorePath}/reports.zip -u " + '$USERNAME:$PASSWORD', returnStdout: true).trim()
         echo "${result}"
     }
 }
