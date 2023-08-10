@@ -24,27 +24,7 @@ def init(String id, String serverUrl, String repo, String credentialsId, String 
 
 def uploadReports(String fromDir, String[] filenames) {
     withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-        // pwd and show files
-        // sh "pwd"
-        // sh "ls -l"
-        // sh "ls -l ${fromDir}"
-        def filepaths = []
-        for (String filename : filenames) {
-            // sh ls to see filenames with pattern, then append to filepaths
-            // filepaths.add(sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim())
-            // seperate filesnames in a seperate index
-            // but a filename can be a pattern, so sh ls will give a list of files, but not in list format
-            // so we need to split the string into a list
-            String files = sh(script: "ls ${fromDir}/${filename}", returnStdout: true).trim()
-            echo "${files}"
-            // split the string into a list
-            String[] filesList = files.split('\n')
-            for (String file : filesList) {
-                filepaths.add(file)
-            }
-            echo "${filepaths}"
-        }
-        if (!copyAndZipFiles(filepaths, "temp", "reports")) {
+        if (!copyAndZipFiles(filenames, fromDir, "reports.gz")) {
             echo "Failed to zip files"
             return
         }
@@ -56,30 +36,36 @@ def uploadReports(String fromDir, String[] filenames) {
     }
 }
 
-private boolean copyAndZipFiles(def fileFullPaths, String toDir, String zipFilename) {
-    // copy files to a directory
-    for (String file : fileFullPaths) {
-        try {
-            sh "cp ${file} ${toDir}"    
-            sh "ls -l temp"
-        } catch (Exception e) {
-            echo "Failed to copy file ${file} to ${toDir}"
-            return false
-        }
-    }
-    // tar files
+private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFilename) {
+    // copy all the files to temporary folder
+    // then zip the folder and name it
+    // then delete the temporary folder
+
+    // create a temporary folder
     try {
-        sh "tar -cvf ${zipFilename}.gz ${toDir}"
-    } catch (Exception e) {
-        echo "Failed to zip files in ${toDir}"
-        return false
-    } finally {
+        def tempDir = sh(script: "mktemp -d", returnStdout: true).trim()
+        echo "tempDir: ${tempDir}"
+
+        // copy files to the temporary folder
+        for (String filename : filenames) {
+            sh "cp ${fromDir}/${filename} ${tempDir}"
+            sh "ls -l ${tempDir}"
+        }
+
+        // zip the temporary folder
+        sh "tar -czf ${zipFilename} ${tempDir}"
         sh "ls -l"
+
+        // delete the temporary folder
+        sh "rm -rf ${tempDir}"
+    } catch (Exception e) {
+        echo "Failed to copy and zip files-echo ${e}"
+        return false
     }
 
-    // check if the zip file exists
     return true
 }
+    
 
 class JfrogBase {
     public String id
