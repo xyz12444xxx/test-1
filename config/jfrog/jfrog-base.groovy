@@ -52,7 +52,10 @@ private boolean copyAndZipFiles(String[] filenames, String fromDir, String zipFi
             sh "ls -l ${tempDir}"
         }
 
-        zip zipFile: "${zipFilename}", archive: false, dir: "${tempDir}"
+        dir("${tempDir}") {
+            sh "ls -l"
+            zip zipFile: "${zipFilename}", archive: false
+        }
 
         // delete the temporary folder
         sh "rm -rf ${tempDir}"
