@@ -66,6 +66,8 @@ private boolean copyAndZipFiles(def filepaths, String toDir, String zipFilename)
             return false
         }
     }
+    
+        sh "ls -l temp"
     // tar files
     try {
         sh "tar -cvf ${zipFilename}.gz ${toDir}"
