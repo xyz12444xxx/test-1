@@ -1,4 +1,4 @@
-jfrog = evaluate(readTrusted('config/jfrog/jfrog-base.groovy'))
+jfrog = evaluate(readTrusted('config/jfrog/artifactory-base.groovy'))
 
 pipeline {
     agent any
@@ -37,14 +37,6 @@ pipeline {
                 sh 'python3 src/main.py'                
             }
         }
-        // stage('Download') {            
-        //     // otherwise get the log from artifactory
-        //     steps {
-        //         script {
-        //             server.download(jfrogSpec)
-        //         }
-        //     }
-        // }
         stage('Test') {
             steps {
                 echo 'Testing..'
@@ -62,21 +54,21 @@ pipeline {
                 // archiveArtifacts artifacts: 'target/baseline_1.0.0.log', fingerprint: true
                 script {
                     // upload reports to artifactory
-                    jfrog.uploadReports('target', (String[])['*.log'])
-                    // rtUpload (
-                    //     serverId: 'artifactory-1',
-                    //     spec: """{
-                    //         "files": [
-                    //             {
-                    //                 "pattern": "target/*.log",
-                    //                 "target": "demo-work/logs/"
-                    //             }
-                    //         ]
-                    //     }"""
-                    // )
+                    jfrog.uploadArtifacts('1', 'target', (String[])['*.log'], 'reports', 'arts.zip')
                 }
                 
                 echo 'Archiving done....'
+            }
+        }
+        stage('Download') {
+            steps {
+                echo 'Downloading....'
+                script {
+                    // download reports from artifactory
+                    jfrog.downloadArtifacts('1', 'arts.zip', "arts_download")
+                }
+                
+                echo 'Downloading done....'
             }
         }
     }
@@ -85,7 +77,7 @@ pipeline {
 void initiate() {
     // create artifactory server
     try {
-        jfrog.init('artifactory-2', params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id, 'logs')
+        jfrog.init(params.artifactory_server_url, params.artifactory_repo, params.artifactory_cred_id)
     } catch (Exception e) {
         echo "Failed to create Artifactory server-echo ${e}"
         error "Failed to create Artifactory server"
