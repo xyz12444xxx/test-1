@@ -1,10 +1,14 @@
+# Use the official Jenkins LTS (Long Term Support) image as the base image
 FROM jenkins/jenkins:lts
+
+# Switch to the root user to install Python
 USER root
-# install python
-RUN apt-get update && apt-get install -y python3-pip
 
-# install plugins
-# COPY plugins.txt /usr/share/jenkins/plugins.txt
-# RUN jenkins-plugin-cli -f /usr/share/jenkins/plugins.txt
+# Update the package list and install Python and pip
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip
 
+# Switch back to the Jenkins user
 USER jenkins
+
+# You can add additional instructions here if needed
